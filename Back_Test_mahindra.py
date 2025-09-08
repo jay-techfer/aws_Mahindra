@@ -19,7 +19,7 @@ import socket
 # from PIL import Image
 # from reportlab.pdfgen import canvas
 # from reportlab.lib.pagesizes import A4
-# from cryptography.fernet import Fernet
+from cryptography.fernet import Fernet
 import os
 import time
 import json
@@ -104,10 +104,14 @@ local_ip = socket.gethostbyname(hostname)
 
 ssms_servers = [
     {
-        "name": "VIJAY\\SQLEXPRESS",   # or just "SQLEXPRESS"
-        "server": "VIJAY\SQLEXPRESS,52235",       # dynamically set IP
-        "username": "sa",
-        "password": "abcd123456"
+        "name": "EC2_SQLSERVER",   # or just "SQLEXPRESS"
+        "server": "localhost,1433",       # dynamically set IP
+        "username": "SA",
+        "password": "Admin@1234"
+        # "name": "COSMOS\\SQLEXPRESS01",
+        # "server": "COSMOS\SQLEXPRESS01,53112",       # dynamically set IP
+        # "username": "sa",
+        # "password": "abcd123456"
     }
 ]
 
@@ -155,21 +159,21 @@ def build_chat_context():
 
 
 def gen_join_queries(user_input, ssms_schema, history=""):
-    user_input_add = user_input.strip().rstrip('.') 
+    user_input_add = user_input.strip().rstrip('.')
     schema_description = ""
     if os.path.exists("parameters.json"):
-                        with open("parameters.json", "r", encoding="utf-8") as f:
-                            param_info = json.load(f)
-                            schema_description += "[parameters.json]\n"
-                            schema_description += "\n".join([
-                                f"- {item['Parameter']}: {item.get('Description', item.get('Descripsition', 'No description'))}"
-                                for item in param_info
-                            ])
-                            schema_description += "\n"
+        with open("parameters.json", "r", encoding="utf-8") as f:
+            param_info = json.load(f)
+            schema_description += "[parameters.json]\n"
+            schema_description += "\n".join([
+                f"- {item['Parameter']}: {item.get('Description', item.get('Descripsition', 'No description'))}"
+                for item in param_info
+            ])
+            schema_description += "\n"
     else:
         schema_description += "[parameters.json]\nSchema details not available.\n"
-                
-                    # Handle the other flat dictionary JSON files
+
+        # Handle the other flat dictionary JSON files
     flat_json_files = ["parts.json", "labour.json", "verbatim.json"]
 
     for file in flat_json_files:
@@ -182,8 +186,8 @@ def gen_join_queries(user_input, ssms_schema, history=""):
         else:
             schema_description += f"[{file}]\nSchema details not available.\n"
 
-                    # Prompt for model
-        history_text = f"Conversation so far:\n{history}\n\n"            
+            # Prompt for model
+        history_text = f"Conversation so far:\n{history}\n\n"
         prompt = f"""
         Their previous chat was:{history_text}
 You are a helpful assistant that generates valid and optimized T-SQL queries for SQL Server.
@@ -240,6 +244,7 @@ Return only the SQL query starting after this line:
 -- SSMS Query Start
 """
     return model.generate_content(prompt).text
+
 
 def detect_mode(user_text):
     classification_prompt = f"""
