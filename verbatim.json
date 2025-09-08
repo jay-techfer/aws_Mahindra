@@ -1,0 +1,14 @@
+{
+  "Dealer_Zone": "The sales or service zone/region where the dealer operates (e.g., EAST ZONE).",
+  "VIN": "Vehicle Identification Number – a unique 17-character code assigned to the vehicle (e.g., MA1AH2GLKB1B16272).",
+  "CUST_VERBTM_CD": "Customer verbatim code used to classify the nature of the customer complaint or request (e.g., ENG1043).",
+  "CUSTMR_VERBTM": "Customer's original verbatim input or complaint as recorded by the service advisor (e.g., ENG-Oil Change/Top-up-all filter check and rep).",
+  "VERB_OBSRVATNS": "Observation made during inspection based on customer complaint or technician's evaluation (e.g., air filter and fuel filter chouk).",
+  "VERB_ACTNTAKN": "Corrective action taken to resolve the observation or issue (e.g., AIR FILTER AND FUEL FILTER CHANGE).",
+  "RO_STATS": "Repair Order status (e.g., BIL = Billed, CLO = Closed, OPN = Open).",
+  "RO_Date": "Date when the Repair Order was created. Format: DD-MM-YYYY (e.g., 19-02-2024).",
+  "RO_Closed_Date": "Date when the Repair Order was completed and closed. Format: DD-MM-YYYY (e.g., 19-02-2024).",
+  "Bill_Date": "Date when the billing for the Repair Order was completed. Format: DD-MM-YYYY (e.g., 19-02-2024).",
+  "RO_ID": "Unique identifier assigned to the Repair Order (e.g., RO24J005110).",
+  "MODEL_GROP": "Model group or category of the vehicle serviced (e.g., THAR)."
+}
