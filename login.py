@@ -115,7 +115,7 @@ def login():
         subprocess.Popen(['streamlit', 'run', 'Back_Test_mahindra.py', "--server.port", "8501", "--server.address", "0.0.0.0",
                           "--server.headless", "true"])
 
-        return redirect(f"http://localhost:8501")
+        return redirect(f"http://{public_ip}:8501")
     else:
         flash("Invalid credentials ❌")
         return redirect('/')
@@ -126,8 +126,8 @@ if __name__ == '__main__':
     def open_browser():
         time.sleep(1)
         webbrowser.open(f"http://127.0.0.1:5000")
-        print(f"DataGenie Running on http://127.0.0.1:5000")
+        print(f"DataGenie Running on http://{public_ip}:5000")
 
-    # threading.Thread(target=open_browser).start()
-    # print("Flask Server Is Starting...")
+    threading.Thread(target=open_browser).start()
+    print("Flask Server Is Starting...")
     app.run(debug=True, host='0.0.0.0', port=5000)
