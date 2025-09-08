@@ -26,10 +26,10 @@ RECAPTCHA_SITE_KEY = "6LfkXZQrAAAAANLCHFVeHYym1YO0F_6aa9mcbziC"     # for templa
 
 conn = pyodbc.connect(
     'DRIVER={ODBC Driver 17 for SQL Server};'
-    'SERVER=COSMOS\\SQLEXPRESS01,53112;'
+    'SERVER=localhost,1433;'
     'DATABASE=query_genie;'
-    'UID=sa;'
-    'PWD=abcd123456;'
+    'UID=SA;'
+    'PWD=abcd@123456;'
 )
 
 # conn = pyodbc.connect(
