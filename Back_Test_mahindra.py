@@ -107,7 +107,7 @@ ssms_servers = [
         "name": "EC2_SQLSERVER",   # or just "SQLEXPRESS"
         "server": "localhost,1433",       # dynamically set IP
         "username": "SA",
-        "password": "Admin@1234"
+        "password": "abcd@123456"
         # "name": "COSMOS\\SQLEXPRESS01",
         # "server": "COSMOS\SQLEXPRESS01,53112",       # dynamically set IP
         # "username": "sa",
@@ -123,17 +123,17 @@ def fetch_ssms_schema():
     data = []
     for s in ssms_servers:
         try:
-            base_conn = f"Driver={{ODBC Driver 17 for SQL Server}};Server={
+            base_conn = f"""Driver={{ODBC Driver 17 for SQL Server}};Server={
                 s['server']};UID={
                 s['username']};PWD={
-                s['password']};Encrypt=no;"
+                s['password']};Encrypt=no;"""
             dbs = ["AdventureWorks2022"]  # ✅ Only fetch AdventureWorks
 
             for db in dbs:
-                db_conn = f"Driver={{ODBC Driver 17 for SQL Server}};Server={
+                db_conn = f"""Driver={{ODBC Driver 17 for SQL Server}};Server={
                     s['server']};Database={db};UID={
                     s['username']};PWD={
-                    s['password']};Encrypt=no;"
+                    s['password']};Encrypt=no;"""
                 engine = create_engine(
                     f"mssql+pyodbc:///?odbc_connect={urllib.parse.quote_plus(db_conn)}")
                 df = pd.read_sql(
